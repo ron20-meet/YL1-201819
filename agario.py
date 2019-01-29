@@ -3,7 +3,7 @@ import time
 import random
 import math
 from ball import Ball
-
+#turtle.bgpic("agarBG.gif")
 turtle.colormode(1)
 turtle.tracer(0)
 turtle.hideturtle()
@@ -70,24 +70,27 @@ def check_all_balls_collision():
    					ball_b.new_Ball(x,y,dx,dy,r,color)
    					ball_a.r=ball_a.r+4
    					ball_a.shapesize(ball_a.r/10)
-   					turtle.clear()
-   					turtle.write("SCORE:" + str(score), font=("Arial", 60, "normal"))
+
+   					scoreT.clear()
+   					scoreT.write("SCORE:" + str(score), font=("Arial", 60, "normal"))
 
    					if(my_ball==ball_b):
    						running=False
    					if (my_ball==ball_a):
    						score = score + 10
+   						print(score,"SCORE")
    				else:
    					ball_a.new_Ball(x,y,dx,dy,r,color)
    					ball_b.r=ball_b.r+4
    					ball_b.shapesize(ball_b.r/10)
-   					turtle.clear()
-   					turtle.write("SCORE:" + str(score), font=("Arial", 60, "normal"))
+   					scoreT.clear()
+   					scoreT.write("SCORE:" + str(score), font=("Arial", 60, "normal"))
 
    					if(my_ball==ball_a):
    						running=False
    					if (my_ball==ball_b):
    						score = score + 10
+   						print(score,"SCORE")
 
 #PART5-Movearound(AHAHAHAHAHAHHA)
 def movearound():
@@ -124,7 +127,21 @@ def movearound():
 
 
 
-	#FEATURES
+	#FEATURES:
+#my_ball name feature:
+
+
+
+
+
+
+
+
+
+
+
+
+
 def gameOver():
 	turtle.pu()
 	turtle.goto(0,150)
@@ -133,8 +150,6 @@ def gameOver():
 
 
 
-turtle.goto(0,0)
-turtle.write("SCORE:" + str(score), font=("Arial", 60, "normal"))
 
 
 #createBotton
@@ -143,22 +158,67 @@ turtle.register_shape("replay.gif")
 botton.shape("replay.gif")
 
 def replay(x,y):
+	global score
+	score = 0
+	scoreT.pu()
+	scoreT.goto(-170,-250)
+	scoreT.write("SCORE:" + str(score), font=("Arial", 30, "normal") , align="center")
+	turtle.clear()
+	scoreT.goto(-170,-250)
+	botton.hideturtle()
+	global running
 	screen_width = turtle.getcanvas().winfo_width()/2
-	screen_height = turtle.getcanvas()winfo_height()/2
+	screen_height = turtle.getcanvas().winfo_height()/2
 	print("replay")
-	my_ball.new_Ball(0,0,10,10,20, "red")
+	#my_ball.new_Ball(0,0,10,10,20, "red")
+	running = True
+	while(running):
+		move_all_balls()
+		movearound()
+		check_all_balls_collision()
+		turtle.update()
+		screen_width = turtle.getcanvas().winfo_width()/2
+		screen_height = turtle.getcanvas().winfo_height()/2
+		time.sleep(.1)
+	print("GAMEOVER")
+	botton.showturtle()
+	turtle.update()
+	botton.goto(0,0)
+	gameOver()
+	print("game over")
+
+
+scoreT = turtle.clone()
+scoreT.pu()
+scoreT.goto(-170,-250)
+scoreT.write("SCORE:" + str(score), font=("Arial", 30, "normal") , align="center")
+botton.onclick(replay)
+
 #for ball in BALLS:
 #	x = random.randint(-screen_width + maximum_ball_radius, screen_height)
 #	y = rendom.randint(-screen_height + maximum_ball_radius)
+
+print('Hey! You there. Enter your name:')
+name = input()
+print(name)
+print(type(name))
+
+
+
+
 
 while(running):
 	move_all_balls()
 	movearound()
 	check_all_balls_collision()
 	turtle.update()
+	my_ball.clear()
+	my_ball.pencolor("black")
+	my_ball.write(name, align = "center",font=("Arial", 15, "normal"))
 	screen_width = turtle.getcanvas().winfo_width()/2
 	screen_height = turtle.getcanvas().winfo_height()/2
 	time.sleep(.1)
+	my_ball.clear()
 
 botton.showturtle()
 turtle.update()
