@@ -23,6 +23,9 @@ minimum_ball_dx = -5
 maximum_ball_dx = 5
 minimum_ball_dy = -5
 maximum_ball_dy = 5
+
+your_name = turtle.textinput("Enter your name", "What is your name?") 
+
 ##part 2:
 BALLS = []
 for i in range (number_of_balls):
@@ -55,7 +58,6 @@ def check_all_balls_collision():
 		all_balls.append(ball)
 	for ball_a in all_balls:
 		for ball_b in all_balls:
-			
 			if collide(ball_a,ball_b):
 				global score
 				r1=ball_a.r
@@ -66,31 +68,31 @@ def check_all_balls_collision():
 				dy = random.randint(minimum_ball_dy , maximum_ball_dy)
 				r = random.randint(minimum_ball_radius , maximum_ball_radius)
 				color = (random.random(), random.random(), random.random())
-   				if (r1>r2):
-   					ball_b.new_Ball(x,y,dx,dy,r,color)
-   					ball_a.r=ball_a.r+4
-   					ball_a.shapesize(ball_a.r/10)
+				if(r1>r2):
+					ball_b.new_Ball(x,y,dx,dy,r,color)
+					ball_a.r=ball_a.r+4
+					ball_a.shapesize(ball_a.r/10)
 
-   					scoreT.clear()
-   					scoreT.write("SCORE:" + str(score), font=("Arial", 60, "normal"))
+					scoreT.clear()
+					scoreT.write("SCORE:" + str(score), font=("Arial", 60, "normal"))
 
-   					if(my_ball==ball_b):
-   						running=False
-   					if (my_ball==ball_a):
-   						score = score + 10
-   						print(score,"SCORE")
-   				else:
-   					ball_a.new_Ball(x,y,dx,dy,r,color)
-   					ball_b.r=ball_b.r+4
-   					ball_b.shapesize(ball_b.r/10)
-   					scoreT.clear()
-   					scoreT.write("SCORE:" + str(score), font=("Arial", 60, "normal"))
+					if(my_ball==ball_b):
+						running=False
+					if (my_ball==ball_a):
+						score = score + 10
+						print(score,"SCORE")
+				else:
+					ball_a.new_Ball(x,y,dx,dy,r,color)
+					ball_b.r=ball_b.r+4
+					ball_b.shapesize(ball_b.r/10)
+					scoreT.clear()
+					scoreT.write("SCORE:" + str(score), font=("Arial", 60, "normal"))
 
-   					if(my_ball==ball_a):
-   						running=False
-   					if (my_ball==ball_b):
-   						score = score + 10
-   						print(score,"SCORE")
+					if(my_ball==ball_a):
+						running=False
+					if (my_ball==ball_b):
+						score = score + 10
+						print(score,"SCORE")
 
 #PART5-Movearound(AHAHAHAHAHAHHA)
 def movearound():
@@ -100,26 +102,26 @@ def movearound():
 	# final_x = cursor_x
 	# final_y = cursor_y
 	# if cursor_x >= my_ball.x:
-	# 	if my_ball.dx <cursor_x - my_ball.x:
-	# 		final_x = my_ball.x + my_ball.dx
-	# 	else:
-	# 		final_x = cursor_x
+	#     if my_ball.dx <cursor_x - my_ball.x:
+	#         final_x = my_ball.x + my_ball.dx
+	#     else:
+	#         final_x = cursor_x
 	# else:
-	# 	if my_ball.x-cursor_x>my_ball.dx:
-	# 		final_x = my_ball.x - my_ball.dx
-	# 	else:
-	# 		final_x = cursor_x
+	#     if my_ball.x-cursor_x>my_ball.dx:
+	#         final_x = my_ball.x - my_ball.dx
+	#     else:
+	#         final_x = cursor_x
 	# if cursor_y >= my_ball.y:
-	# 	if my_ball.dy < cursor_y - my_ball.y:
-	# 		final_y = my_ball.y + my_ball.dy
-	# 	else:
-	# 		final_y = cursor_y
+	#     if my_ball.dy < cursor_y - my_ball.y:
+	#         final_y = my_ball.y + my_ball.dy
+	#     else:
+	#         final_y = cursor_y
 	# else:
-	# 	if my_ball.y-cursor_y>my_ball.dy:
-	# 		final_y = my_ball.y - my_ball.dy
-	# 	else:
-	# 		final_y = cursor_y
-	# 		print
+	#     if my_ball.y-cursor_y>my_ball.dy:
+	#         final_y = my_ball.y - my_ball.dy
+	#     else:
+	#         final_y = cursor_y
+	#         print
 	# print("(C" + str(cursor_x) + "," + str(cursor_y) + ")")
 	# print("("+ str(final_x) + "," + str(final_y) + ")")
 	# my_ball.goto(final_x, final_y)
@@ -179,6 +181,11 @@ def replay(x,y):
 		turtle.update()
 		screen_width = turtle.getcanvas().winfo_width()/2
 		screen_height = turtle.getcanvas().winfo_height()/2
+		my_ball.clear()
+		my_ball.pencolor("black")
+		my_ball.write(your_name, align = "center",font=("Arial", 15, "normal"))
+		screen_width = turtle.getcanvas().winfo_width()/2
+		screen_height = turtle.getcanvas().winfo_height()/2
 		time.sleep(.1)
 	print("GAMEOVER")
 	botton.showturtle()
@@ -195,13 +202,8 @@ scoreT.write("SCORE:" + str(score), font=("Arial", 30, "normal") , align="center
 botton.onclick(replay)
 
 #for ball in BALLS:
-#	x = random.randint(-screen_width + maximum_ball_radius, screen_height)
-#	y = rendom.randint(-screen_height + maximum_ball_radius)
-
-print('Hey! You there. Enter your name:')
-name = input()
-print(name)
-print(type(name))
+#    x = random.randint(-screen_width + maximum_ball_radius, screen_height)
+#    y = rendom.randint(-screen_height + maximum_ball_radius)
 
 
 
@@ -214,7 +216,7 @@ while(running):
 	turtle.update()
 	my_ball.clear()
 	my_ball.pencolor("black")
-	my_ball.write(name, align = "center",font=("Arial", 15, "normal"))
+	my_ball.write(your_name, align = "center",font=("Arial", 15, "normal"))
 	screen_width = turtle.getcanvas().winfo_width()/2
 	screen_height = turtle.getcanvas().winfo_height()/2
 	time.sleep(.1)
